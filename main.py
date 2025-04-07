@@ -23,6 +23,8 @@ def main():
     c1.draw()
     c2.draw()
     c3.draw()
+    c1.draw_move(c2)
+    c2.draw_move(c3)
     win.wait_for_close()
 
 

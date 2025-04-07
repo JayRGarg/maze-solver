@@ -13,6 +13,7 @@ class Cell:
         self._x2:int = x2
         self._y1:int = y1
         self._y2:int = y2
+        self._center:Point = Point(round((self._x1+self._x2)/2), round((self._y1+self._y2)/2))
         self._win:Window = win
 
     def draw(self):
@@ -28,3 +29,8 @@ class Cell:
         if self.has_bottom_wall:
             bottom_wall = Line(Point(self._x1, self._y2), Point(self._x2, self._y2))
             self._win.draw_line(bottom_wall, "black")
+
+    def draw_move(self, to_cell, undo=False):
+        move = Line(self._center, to_cell._center)
+        color = "gray" if undo else "red"
+        self._win.draw_line(move, color)
