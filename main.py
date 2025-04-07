@@ -13,12 +13,12 @@ def main():
     # win.draw_line(l1, "black")
     # win.draw_line(l2, "red")
     # win.draw_line(l3, "red")
-    c1 = Cell(10, 20, 10, 20, win)
+    c1 = Cell(10, 10, 20, 20, win)
     c1.has_right_wall = False
-    c2 = Cell(20, 30, 10, 20, win)
+    c2 = Cell(20, 10, 30, 20, win)
     c2.has_left_wall = False
     c2.has_bottom_wall = False
-    c3 = Cell(20, 30, 20, 30, win)
+    c3 = Cell(20, 20, 30, 30, win)
     c3. has_top_wall = False
     c1.draw()
     c2.draw()

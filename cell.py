@@ -3,7 +3,7 @@ from window import Window
 
 class Cell:
 
-    def __init__(self, x1, x2, y1, y2, win):
+    def __init__(self, x1, y1, x2, y2, win=None):
         self.has_left_wall:bool = True
         self.has_right_wall:bool = True
         self.has_top_wall:bool = True
@@ -14,7 +14,7 @@ class Cell:
         self._y1:int = y1
         self._y2:int = y2
         self._center:Point = Point(round((self._x1+self._x2)/2), round((self._y1+self._y2)/2))
-        self._win:Window = win
+        self._win:Window|None = win
 
     def draw(self):
         if self.has_left_wall:
