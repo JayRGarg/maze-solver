@@ -17,18 +17,29 @@ class Cell:
         self._win:Window|None = win
 
     def draw(self):
+        left_wall = Line(Point(self._x1, self._y1), Point(self._x1, self._y2))
+        top_wall = Line(Point(self._x1, self._y1), Point(self._x2, self._y1))
+        right_wall = Line(Point(self._x2, self._y1), Point(self._x2, self._y2))
+        bottom_wall = Line(Point(self._x1, self._y2), Point(self._x2, self._y2))
         if self.has_left_wall:
-            left_wall = Line(Point(self._x1, self._y1), Point(self._x1, self._y2))
             self._win.draw_line(left_wall, "black")
+        else:
+            self._win.draw_line(left_wall, "#d9d9d9")
+
         if self.has_top_wall:
-            top_wall = Line(Point(self._x1, self._y1), Point(self._x2, self._y1))
             self._win.draw_line(top_wall, "black")
+        else:
+            self._win.draw_line(top_wall, "#d9d9d9")
+
         if self.has_right_wall:
-            right_wall = Line(Point(self._x2, self._y1), Point(self._x2, self._y2))
             self._win.draw_line(right_wall, "black")
+        else:
+            self._win.draw_line(right_wall, "#d9d9d9")
+
         if self.has_bottom_wall:
-            bottom_wall = Line(Point(self._x1, self._y2), Point(self._x2, self._y2))
             self._win.draw_line(bottom_wall, "black")
+        else:
+            self._win.draw_line(bottom_wall, "#d9d9d9")
 
     def draw_move(self, to_cell, undo=False):
         move = Line(self._center, to_cell._center)
