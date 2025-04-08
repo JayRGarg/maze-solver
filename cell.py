@@ -15,6 +15,7 @@ class Cell:
         self._y2:int = y2
         self._center:Point = Point(round((self._x1+self._x2)/2), round((self._y1+self._y2)/2))
         self._win:Window|None = win
+        self.visited = False
 
     def draw(self):
         left_wall = Line(Point(self._x1, self._y1), Point(self._x1, self._y2))
