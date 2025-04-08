@@ -23,7 +23,7 @@ class Maze:
         self.cell_size_x = cell_size_x
         self.cell_size_y = cell_size_y
         self._win = win
-        if seed:
+        if seed is not None:
             random.seed(seed)
 
         self._create_cells()
@@ -51,9 +51,12 @@ class Maze:
         self._cells[i][j].draw()
         self._animate()
 
-    def _animate(self):
+    def _animate(self, slow=False):
         self._win.redraw()
-        time.sleep(0.05)
+        if slow:
+            time.sleep(0.05)#05)
+        else:
+            time.sleep(0.001)
 
     def _break_entrance_and_exit(self):
         self._cells[0][0].has_top_wall = False
@@ -106,3 +109,40 @@ class Maze:
             for j in range(self.num_rows):
                 self._cells[i][j].visited = False
 
+    def _unobstructed(self, dir, cell1, cell2):
+        if dir == [-1, 0]:
+            return (not cell1.has_left_wall) and (not cell2.has_right_wall)
+        elif dir == [1, 0]:
+            return (not cell1.has_right_wall) and (not cell2.has_left_wall)
+        elif dir == [0, -1]:
+            return (not cell1.has_top_wall) and (not cell2.has_bottom_wall)
+        elif dir == [0, 1]:
+            return (not cell1.has_bottom_wall) and (not cell2.has_top_wall)
+        else:
+            raise Exception("Invalid Direction")
+
+    def solve(self):
+        return self._solve_r(0, 0)
+
+    def _solve_r(self, i, j):
+        if self._win:
+            self._animate(slow=True)
+        self._cells[i][j].visited = True
+        if [i, j] == [self.num_cols-1, self.num_rows-1]:
+            return True
+        dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+        for dir in dirs:
+            i2 = i + dir[0]
+            j2 = j + dir[1]
+            if (0 <= i2 <= self.num_cols-1) and (0 <= j2 <= self.num_rows-1):
+                if not self._cells[i2][j2].visited:
+                    if self._unobstructed(dir, self._cells[i][j], self._cells[i2][j2]):
+                        if self._win:
+                            self._cells[i][j].draw_move(self._cells[i2][j2])
+                            solved = self._solve_r(i2, j2)
+                            if solved:
+                                return True
+                            else:
+                                self._cells[i][j].draw_move(self._cells[i2][j2], undo=True)
+                                self._animate(slow=True)
+        return False

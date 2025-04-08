@@ -4,32 +4,13 @@ from cell import Cell
 from maze import Maze
 
 def main():
-    win = Window(800, 600)
-    # p1 = Point(10, 0)
-    # p2 = Point(10, 50)
-    # p3 = Point(25, 50)
-    # l1 = Line(p1, p2)
-    # l2 = Line(p2, p3)
-    # l3 = Line(p3, p1)
-    # win.draw_line(l1, "black")
-    # win.draw_line(l2, "red")
-    # win.draw_line(l3, "red")
-    
-    # c1 = Cell(10, 10, 20, 20, win)
-    # c1.has_right_wall = False
-    # c2 = Cell(20, 10, 30, 20, win)
-    # c2.has_left_wall = False
-    # c2.has_bottom_wall = False
-    # c3 = Cell(20, 20, 30, 30, win)
-    # c3. has_top_wall = False
-    # c1.draw()
-    # c2.draw()
-    # c3.draw()
-    # c1.draw_move(c2)
-    # c2.draw_move(c3)
 
-    m1 = Maze(20, 20, 10, 10, 10, 10, win)
+    win = Window(1100, 1100)
+    m1 = Maze(40, 40, 25, 25, 40, 40, win)#, seed=0)
+    m1.solve()
     win.wait_for_close()
+
+    return
 
 
 if __name__ == "__main__":

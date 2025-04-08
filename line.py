@@ -15,6 +15,6 @@ class Line:
         y1:int = self.p1.y
         x2:int = self.p2.x
         y2:int = self.p2.y
-        print(f"Drawing {x1},{y2} to {x2},{y2}")
+        #print(f"Drawing {x1},{y2} to {x2},{y2}")
         canvas.create_line(x1, y1, x2, y2, fill=fill_color, width=2)
 
